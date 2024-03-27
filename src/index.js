@@ -34,10 +34,10 @@ function formatDate(date) {
   let day = days[date.getDay()];
 
   if (minutes < 10) {
-    minutes = `0${minuutes}`;
+    minutes = `0${minutes}`;
   }
 
-  return `${day} ${hours}: ${minutes}`;
+  return `${day} ${hours}:${minutes}`;
 }
 function searchCity(city) {
   let apiKey = "c9b30483aedf4foe2dd664a0ftc74778";
@@ -52,5 +52,32 @@ function changeSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
+function displayForecast() {
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+  <div class="row">
+    <div class="row-2">
+      <div class="weather-forecast-day">${day}</div>
+      <div class="weather-forecast-icon">☀️</div>
+      <div class="weather-forecast-temp">
+        <span class="maximum-temperature">18°</span>
+        <span class="minimum-temperature">12°</span>
+      </div>
+    </div>
+  </div>
+`;
+  });
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", changeSearchSubmit);
+
+searchCity("Paris");
+displayForecast();
